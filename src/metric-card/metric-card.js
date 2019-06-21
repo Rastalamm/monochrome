@@ -31,7 +31,7 @@ class MetricCard extends PureComponent {
     style: PropTypes.object,
     error: PropTypes.string,
     isLoading: PropTypes.bool,
-    missingData: PropTypes.any,
+    missingData: PropTypes.array,
 
     children: PropTypes.element
   };
@@ -44,7 +44,7 @@ class MetricCard extends PureComponent {
     style: {},
     error: null,
     isLoading: false,
-    missingData: undefined
+    missingData: []
   };
 
   render() {
@@ -65,7 +65,7 @@ class MetricCard extends PureComponent {
           </CardTitle>
         )}
 
-        {missingData && <MissingData style={style} missingData={missingData} />}
+        {missingData.length && <MissingData style={style} missingData={missingData} />}
 
         {!isLoading && !error && this.props.children}
         {isLoading && <Spinner style={style.spinner} />}
