@@ -5,6 +5,18 @@ import {Tooltip} from '../shared/popover';
 
 import {withTheme} from '../shared/theme';
 import {CardContainer, CardTitle, ErrorMessage} from './styled-components';
+import MissingDataTitle from './missing-data-title';
+
+const MissingData = props => {
+  const {style, missingData} = props;
+  const missingDataAsString = missingData.join(', ');
+
+  return (
+    <Tooltip style={style.tooltip} content={missingDataAsString}>
+      <MissingDataTitle missingData={missingDataAsString} />
+    </Tooltip>
+  );
+};
 
 /**
  * MetricCard places a chart in a container with padding, title,
@@ -19,6 +31,7 @@ class MetricCard extends PureComponent {
     style: PropTypes.object,
     error: PropTypes.string,
     isLoading: PropTypes.bool,
+    missingData: PropTypes.any,
 
     children: PropTypes.element
   };
@@ -30,11 +43,12 @@ class MetricCard extends PureComponent {
 
     style: {},
     error: null,
-    isLoading: false
+    isLoading: false,
+    missingData: undefined
   };
 
   render() {
-    const {theme, style, error, isLoading, className, title, description} = this.props;
+    const {theme, style, error, isLoading, className, title, description, missingData} = this.props;
     const styleProps = {
       theme,
       hasError: Boolean(error),
@@ -50,6 +64,8 @@ class MetricCard extends PureComponent {
             </Tooltip>
           </CardTitle>
         )}
+
+        {missingData && <MissingData style={style} missingData={missingData} />}
 
         {!isLoading && !error && this.props.children}
         {isLoading && <Spinner style={style.spinner} />}
