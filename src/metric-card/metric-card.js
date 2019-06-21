@@ -4,17 +4,18 @@ import Spinner from '../shared/spinner';
 import {Tooltip} from '../shared/popover';
 
 import {withTheme} from '../shared/theme';
-import {CardContainer, CardTitle, ErrorMessage} from './styled-components';
-import MissingDataTitle from './missing-data-title';
+import {CardContainer, CardTitle, ErrorMessage, MissingDataTitle} from './styled-components';
 
 const MissingData = props => {
-  const {style, missingData} = props;
+  const {styleProps, style, missingData} = props;
   const missingDataAsString = missingData.join(', ');
 
   return (
-    <Tooltip style={style.tooltip} content={missingDataAsString}>
-      <MissingDataTitle missingData={missingDataAsString} />
-    </Tooltip>
+    <MissingDataTitle {...styleProps} userStyle={style.title}>
+      <Tooltip style={style.tooltip} content={missingDataAsString}>
+        Missing Data: {missingDataAsString}
+      </Tooltip>
+    </MissingDataTitle>
   );
 };
 
@@ -65,7 +66,9 @@ class MetricCard extends PureComponent {
           </CardTitle>
         )}
 
-        {missingData.length && <MissingData style={style} missingData={missingData} />}
+        {missingData.length && (
+          <MissingData styleProps={styleProps} style={style} missingData={missingData} />
+        )}
 
         {!isLoading && !error && this.props.children}
         {isLoading && <Spinner style={style.spinner} />}

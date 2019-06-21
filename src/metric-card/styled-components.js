@@ -27,6 +27,15 @@ export const ErrorMessage = styled.div(props => ({
   ...evaluateStyle(props.userStyle, props)
 }));
 
+export const MissingDataTitle = styled.div(props => ({
+  color: 'red',
+  padding: '10px 0',
+  maxWidth: '100%',
+  whiteSpace: 'nowrap',
+  textOverflow: 'ellipsis',
+  ...evaluateStyle(props.userStyle, props)
+}));
+
 // react-vis styles
 /* Adpated from react-vis/dist/styles/plot.scss */
 export const ChartContainer = styled.div(props => ({
