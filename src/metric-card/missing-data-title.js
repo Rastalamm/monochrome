@@ -10,14 +10,22 @@ export default class MissingDataTitle extends PureComponent {
   };
 
   static defaultProps = {
-    missingData: ""
+    missingData: ''
   };
 
   render() {
     return (
-      <div style={{ color: "red", padding: "10px 0", maxWidth: '100%', whiteSpace: 'nowrap', textOverflow: 'ellipsis'}}>
-          Missing Data: {this.props.missingData}
+      <div
+        style={{
+          color: 'red',
+          padding: '10px 0',
+          maxWidth: '100%',
+          whiteSpace: 'nowrap',
+          textOverflow: 'ellipsis'
+        }}
+      >
+        Missing Data: {this.props.missingData}
       </div>
-    )
+    );
   }
 }
