@@ -4,20 +4,7 @@ import Spinner from '../shared/spinner';
 import {Tooltip} from '../shared/popover';
 
 import {withTheme} from '../shared/theme';
-import {CardContainer, CardTitle, ErrorMessage, MissingDataTitle} from './styled-components';
-
-const MissingData = props => {
-  const {styleProps, style, missingData} = props;
-  const missingDataAsString = missingData.join(', ');
-
-  return (
-    <MissingDataTitle {...styleProps} userStyle={style.title}>
-      <Tooltip style={style.tooltip} content={missingDataAsString}>
-        Missing Data: {missingDataAsString}
-      </Tooltip>
-    </MissingDataTitle>
-  );
-};
+import {CardContainer, CardTitle, ErrorMessage } from './styled-components';
 
 /**
  * MetricCard places a chart in a container with padding, title,
@@ -32,7 +19,6 @@ class MetricCard extends PureComponent {
     style: PropTypes.object,
     error: PropTypes.string,
     isLoading: PropTypes.bool,
-    missingData: PropTypes.array,
 
     children: PropTypes.element
   };
@@ -44,12 +30,11 @@ class MetricCard extends PureComponent {
 
     style: {},
     error: null,
-    isLoading: false,
-    missingData: []
+    isLoading: false
   };
 
   render() {
-    const {theme, style, error, isLoading, className, title, description, missingData} = this.props;
+    const {theme, style, error, isLoading, className, title, description} = this.props;
     const styleProps = {
       theme,
       hasError: Boolean(error),
@@ -64,10 +49,6 @@ class MetricCard extends PureComponent {
               {title}
             </Tooltip>
           </CardTitle>
-        )}
-
-        {missingData.length && (
-          <MissingData styleProps={styleProps} style={style} missingData={missingData} />
         )}
 
         {!isLoading && !error && this.props.children}
