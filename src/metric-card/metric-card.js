@@ -4,7 +4,7 @@ import Spinner from '../shared/spinner';
 import {Tooltip} from '../shared/popover';
 
 import {withTheme} from '../shared/theme';
-import {CardContainer, CardTitle, ErrorMessage } from './styled-components';
+import {CardContainer, CardTitle, ErrorMessage} from './styled-components';
 
 /**
  * MetricCard places a chart in a container with padding, title,
